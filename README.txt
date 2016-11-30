@@ -41,4 +41,4 @@ Major features in Courses4Career include:
 
 == Changelog ==
 = 1.0.0 =
-* Initial Release 20 November 2016
+* Initial Release 30 November 2016
