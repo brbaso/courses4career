@@ -33,7 +33,7 @@ use C4C\Includes\Courses_For_Career_Deactivator ;
  * plugin activation. 
  */
 function activate_courses_for_career() {
-	//require_once plugin_dir_path( __FILE__ ) . 'includes/class-courses-for-career-activator.php';
+
 	Courses_For_Career_Activator::activate();	
 }
 
@@ -41,19 +41,13 @@ function activate_courses_for_career() {
  * plugin deactivation.
  */
 function deactivate_courses_for_career() {
-	//require_once plugin_dir_path( __FILE__ ) . 'includes/class-courses-for-career-deactivator.php';
+
 	Courses_For_Career_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_courses_for_career' );
 register_deactivation_hook( __FILE__, 'deactivate_courses_for_career' );
 
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-//require plugin_dir_path( __FILE__ ) . 'includes/class-courses-for-career.php';
 
 /**
  * Begins execution of the plugin.
