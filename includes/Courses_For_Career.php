@@ -12,7 +12,7 @@ use Widget\C4C_Widget ;
 use Widget\Views\Ajax\Widget_Ajax ;
 
 /**
- * The file that defines the core plugin class
+ * core plugin class
  *
  * @link       brbaso.com
  * @since      1.0.0
@@ -56,10 +56,6 @@ class Courses_For_Career {
 	/**
 	 * Define the core functionality of the plugin.
 	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
-	 *
 	 * @since    1.0.0
 	 */
 	public function __construct() {
@@ -78,70 +74,13 @@ class Courses_For_Career {
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - Courses_For_Career_Loader. Orchestrates the hooks of the plugin.
-	 * - Courses_For_Career_i18n. Defines internationalization functionality.
-	 * - Courses_For_Career_Admin. Defines all hooks for the admin area.
-	 * - Courses_For_Career_Public. Defines all hooks for the public side of the site.
-	 * - Courses_For_Career_Database. DB operatons.
-	 * - Load C4C_Widget
-	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
 
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-courses-for-career-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-courses-for-career-public.php';
-
-		/**
-		 * The class responsible for ajax response
-		 * side of the site.
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/ajax/courses-for-career-ajax.php';
-
-		/**
-		 * The class responsible for db handle
-		 *
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-database.php';
-
-		/**
-		 * The C4C_Widget
-		 *
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . '/c4c-widget/c4c-widget.php';
-
-		/**
-		 * The C4C_Widget_Ajax
-		 *
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . '/c4c-widget/views/ajax/c4c-widget-ajax.php';
-
 		//Create an instance of the loader which will be used to register the hooks
 		$this->loader = new Courses_For_Career_Loader();
-
 	}
 
 	/**
@@ -151,12 +90,6 @@ class Courses_For_Career {
 	 * @access   private
 	 */
 	private function adding_shortcode() {
-
-		/**
-		 * The class responsible for adding plugin's shortcode
-		 *
-		 */
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-shortcode.php';
 
 		// add shortcode
 		add_shortcode( 'courses4career', array( 'Includes\Courses_For_Career_Shortcode', 'courses_for_careershortcode_func' ) );
