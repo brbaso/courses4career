@@ -1,5 +1,9 @@
 <?php
 
+namespace Front\Ajax ;
+
+use Includes\Courses_For_Career_Database;
+
 /**
  * The ajax response - list of courses to render.
  *

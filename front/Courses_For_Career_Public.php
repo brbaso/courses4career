@@ -1,5 +1,10 @@
 <?php
 
+namespace Front ;
+
+use Includes\Courses_For_Career_Database;
+use Front\Partials\Courses_For_Career_Public_Display;
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -71,8 +76,8 @@ class Courses_For_Career_Public {
 	 * @since    1.0.0
 	 */
 	public function display_public_page() {
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/courses-for-career-public-display.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-database.php';
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/courses-for-career-public-display.php';
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-database.php';
 		
 		$dbhandle = new Courses_For_Career_Database('courses_for_career');
 		$public_display = new Courses_For_Career_Public_Display($dbhandle);

@@ -1,5 +1,11 @@
 <?php
 
+namespace Admin ;
+
+use Includes\Courses_For_Career_Database;
+use Admin\Courses_For_Career_Admin_Page ;
+use Admin\Partials\Courses_For_Career_Admin_Display;
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -96,7 +102,10 @@ class Courses_For_Career_Admin {
 	 * @since    1.0.0
 	 */
 	public function display_options_page() {
-		include_once 'partials/courses-for-career-admin-display.php';
+
+		$options_page = new Courses_For_Career_Admin_Display( $this->plugin_name ) ;
+
+		return $options_page;
 	}
 	
 	/**
@@ -105,10 +114,9 @@ class Courses_For_Career_Admin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_page() {
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-courses-for-career-admin-page.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-courses-for-career-database.php';
 		
-		$dbhandle = new Courses_For_Career_Database('courses_for_career');		
+		$dbhandle = new Courses_For_Career_Database('courses_for_career');
+
 		return new Courses_For_Career_Admin_Page($dbhandle);		
 	}
 	

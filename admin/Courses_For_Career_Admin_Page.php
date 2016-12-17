@@ -1,5 +1,9 @@
 <?php
 
+namespace Admin ;
+
+use Includes\Courses_For_Career_Database;
+
 /**
  * The admin page of the plugin.
  *

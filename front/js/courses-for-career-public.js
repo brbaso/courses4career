@@ -22,7 +22,7 @@
 					career_id: career_id, // career id					
 					wtype: wtype, // is it widget					
 					wid: wid, // widget id - needed for widget rendering					
-				}
+				};
 		
 			response_container.html('').append(animation_container);
 			animation_container.show(); // Show the animate loading
@@ -39,14 +39,14 @@
 					response_container.html(response).append(animation_container);
 					animation_container.hide(); // Hide the loading animation
 					
-					return; 
+
 				},
 				error: function(xhr,textStatus,e) { 
 					//alert(e);
 					alert('There was an error');				
 					animation_container.hide(); // Hide the loading animation
 					
-					return; 
+
 				}
 			};
 			$.ajax(opts);	

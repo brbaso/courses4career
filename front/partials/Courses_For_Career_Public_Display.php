@@ -1,5 +1,9 @@
 <?php
 
+namespace Front\Partials ;
+
+use Includes\Courses_For_Career_Database;
+
 /**
  * The public page of the plugin.
  *

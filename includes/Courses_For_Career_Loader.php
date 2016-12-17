@@ -1,5 +1,9 @@
 <?php
 
+namespace Includes;
+
+
+
 /**
  * Register all actions and filters for the plugin.
  *

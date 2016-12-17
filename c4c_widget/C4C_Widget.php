@@ -1,4 +1,9 @@
 <?php
+
+namespace Widget ;
+
+use Includes\Courses_For_Career_Database;
+
 /**
  *
  * @package   C4C_Widget
@@ -17,7 +22,7 @@ if ( ! defined ( 'ABSPATH' ) ) {
 }
 
 
-class C4C_Widget extends WP_Widget {
+class C4C_Widget extends \WP_Widget {
 
     /**     
      *

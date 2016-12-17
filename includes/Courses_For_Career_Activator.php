@@ -1,5 +1,7 @@
 <?php
 
+namespace C4C\Includes;
+
 /**
  * Fired during plugin activation.
  *

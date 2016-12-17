@@ -1,4 +1,7 @@
 <?php
+
+namespace Includes;
+
 /**
  * Database functionality 
  *

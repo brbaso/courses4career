@@ -1,5 +1,7 @@
 <?php
 
+namespace C4C\Includes;
+
 /**
  * Define the internationalization functionality. 
  *

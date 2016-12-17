@@ -1,5 +1,9 @@
 <?php
 
+namespace Widget\Views\Ajax;
+
+use Includes\Courses_For_Career_Database;
+
 /**
  * The ajax response - list of courses to render in widget.
  *
@@ -8,7 +12,7 @@
  *
  */
 
-class C4C_Widget_Ajax{
+class Widget_Ajax{
 	
 	/**
 	 * Dependency: Courses_For_Career_Database	  includes/class-courses-for-career-database.php
@@ -57,7 +61,7 @@ class C4C_Widget_Ajax{
 			foreach ($courses as $c ){
 				$output .= '<article class="course type-course">';					
 					if($image_show) {
-						$output .= '<a href="'.$c -> permalink.'" title="'.$c -> post_title.'"  class="'.$image_class.'">
+						$output .= '<a href="'.$c -> permalink.'" title="'.$c -> post_title.'"  class="">
 						<img src="'.$c -> image[0].'" class="wh-course-search-thumb wp-post-image" alt="'.$c -> post_title.'" width="170" height="170">
 						</a>';		
 					}					
