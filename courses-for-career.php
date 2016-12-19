@@ -20,10 +20,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-
-
-//print_r(__DIR__); die;
-
 require __DIR__ . '/vendor/autoload.php';
 
 use C4C\Includes\Courses_For_Career ;
@@ -47,7 +43,6 @@ function deactivate_courses_for_career() {
 
 register_activation_hook( __FILE__, 'activate_courses_for_career' );
 register_deactivation_hook( __FILE__, 'deactivate_courses_for_career' );
-
 
 /**
  * Begins execution of the plugin.
