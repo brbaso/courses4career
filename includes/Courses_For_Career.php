@@ -21,8 +21,6 @@ use Widget\Views\Ajax\Widget_Ajax ;
  * @subpackage Courses_For_Career/includes
  */
 
-
-
 class Courses_For_Career {
 
 	/**
@@ -97,9 +95,6 @@ class Courses_For_Career {
 
 	/**
 	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Courses_For_Career_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   private
