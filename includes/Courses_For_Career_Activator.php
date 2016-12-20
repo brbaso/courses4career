@@ -1,5 +1,4 @@
 <?php
-
 namespace C4C\Includes;
 
 /**
@@ -14,18 +13,19 @@ namespace C4C\Includes;
  */
 class Courses_For_Career_Activator {
 		 
-	public static function activate() {
-		self::check_dependencies();		
-		self::courses_for_career_create_db();
+	public function __construct() {
+
 	}
 	
-	public static function courses_for_career_create_db() {
+	public function courses_for_career_create_db() {
+
+		static::check_dependencies();
 
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
 		$table_name = $wpdb->prefix . 'courses_for_career';
 
-		$sql = "CREATE TABLE $table_name (
+		$sql = "CREATE TABLE IF NOT EXISTS $table_name (
 			id mediumint(9) NOT NULL AUTO_INCREMENT,			
 			name varchar(255) NOT NULL,
 			description text NOT NULL,
@@ -40,12 +40,12 @@ class Courses_For_Career_Activator {
 	}
 	
 	 /**
-	 * Make sure SENSEI exists has or else self-destruct
+	 * Make sure SENSEI exists or else self-destruct
 	 */
 	 public static function check_dependencies() {
 		// do nothing if SENSEI exists
 		if ( !function_exists( 'Sensei' ) ) {			
-			die( 'This plugin requires SENSEI Woocommerce extension. Please install and activate SENSEI before activating this plugin.' );
+			die( 'The Courses4Career plugin requires SENSEI Woocommerce extension. Please <a target="_blank" href="http://www.woothemes.com/products/sensei/">install</a> and activate SENSEI before activating this plugin.' );
 		}
 	 }
 }
