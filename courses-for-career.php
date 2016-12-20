@@ -23,34 +23,16 @@ if ( ! defined( 'WPINC' ) ) {
 require __DIR__ . '/vendor/autoload.php';
 
 use C4C\Includes\Courses_For_Career ;
-use C4C\Includes\Courses_For_Career_Activator ;
-use C4C\Includes\Courses_For_Career_Deactivator ;
+
 /**
- * plugin activation. 
+ * Plugin activation deactivation.
  */
-function activate_courses_for_career() {
-
-	Courses_For_Career_Activator::activate();	
-}
+register_activation_hook( __FILE__, array( 'C4C\Includes\Courses_For_Career_Activator', 'courses_for_career_create_db' ) );
+register_deactivation_hook( __FILE__, array( 'C4C\Includes\Courses_For_Career_Deactivator', 'deactivate' ) );
 
 /**
- * plugin deactivation.
- */
-function deactivate_courses_for_career() {
-
-	Courses_For_Career_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_courses_for_career' );
-register_deactivation_hook( __FILE__, 'deactivate_courses_for_career' );
-
-/**
- * Begins execution of the plugin.
+ * Run the plugin.
  * @since    1.0.0
  */
-function run_courses_for_career() {
-	//$plugin = new C4C\Courses_For_Career\ Courses_For_Career();
-	$plugin = new Courses_For_Career();
-	$plugin->run();
-}
-run_courses_for_career();
+$plugin = new Courses_For_Career();
+$plugin->run();
