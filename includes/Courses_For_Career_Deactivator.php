@@ -11,6 +11,10 @@ namespace C4C\Includes;
  */
 class Courses_For_Career_Deactivator {
 
+	public function __construct() {
+
+	}
+
 	public static function deactivate() {
 
 	}
