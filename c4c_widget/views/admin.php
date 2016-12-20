@@ -1,3 +1,5 @@
+<?php
+?>
 <p>
 	<label	for="<?php echo $this->get_field_id('widget_title'); ?>"><?php _e('Widget Title', 'c4c-widget'); ?></label><br/>
 	<input class="widefat" name="<?php echo $this->get_field_name('widget_title'); ?>" id="<?php echo $this->get_field_id('widget_title'); ?>" value="<?php echo esc_attr($instance['widget_title']); ?>"/>

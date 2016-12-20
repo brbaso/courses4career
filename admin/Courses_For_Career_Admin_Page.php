@@ -1,5 +1,4 @@
 <?php
-
 namespace Admin ;
 
 use Includes\Courses_For_Career_Database;

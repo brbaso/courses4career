@@ -1,5 +1,4 @@
 <?php
-
 namespace C4C\Includes;
 
 use Includes\Courses_For_Career_Loader ;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Front\Ajax ;
 
 use Includes\Courses_For_Career_Database;
