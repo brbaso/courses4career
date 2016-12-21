@@ -42,7 +42,6 @@ class Courses_For_Career_Database {
 	 */
 	public function career_save(){
 
-		// TODO sanitize post and verify nonce
 		$db = $this ->db;
 		$table = $this -> table;
 		
@@ -51,38 +50,56 @@ class Courses_For_Career_Database {
 		
 		parse_str($_POST['form_data'], $form_data);
 		$form_data['courses'] = json_encode($form_data['courses'], true);
+
+		// sanitize
+		$form_data = $this -> sanitize( $form_data );
+
+		// nonce check
+		if (!wp_verify_nonce( $form_data['_wpnonce'] ) ) die( 'Failed security check' );
+		unset($form_data['_wpnonce']);
+		unset($form_data['_wp_http_referer']);
+
 		$form_data['time'] = current_time( 'mysql' );
-		
+
 		// get existing max ordering number and increase +1
 		$max = $db->get_var( "SELECT MAX( ordering ) AS max FROM $table" );
 		$form_data['ordering'] = $max + 1;
-				
+
 		$db ->insert( 
 			$table, 
 			$form_data
 		);
+
 		$new_id = $db -> insert_id;
 		echo json_encode($new_id);
 		wp_die();
 	}
 	
 	/**
-	 * Dlete career
+	 * Delete career
 	 *
 	 * @since    1.0.0
 	 * 
 	 */
 	public function career_delete(){
 		
-		// TODO sanitize post and verify nonce
+		$db = $this ->db;
 		$data = $_POST;
-		
-		$this ->db ->delete( 
+		parse_str($data['form_data'], $form_data);
+
+		// sanitize
+		$form_data = $this -> sanitize( $form_data );
+
+		// nonce check
+		if (!wp_verify_nonce( $form_data['_wpnonce'] ) ) die( 'Failed security check' );
+
+		$db ->delete(
 				$this -> table, 
-				array( 'id' => $data['career_id'] )
+				array( 'id' => $data['career_id'] ),
+				array( '%d' )
 			);
 			
-		// make refresh ordering after delete
+		// refresh ordering after delete
 		$this -> refresh_order();		
 	}
 
@@ -94,7 +111,7 @@ class Courses_For_Career_Database {
 	 * @return object Object      career row
 	 * @since    1.0.0
 	 */
-	public function career_get(  $id = 0 ){
+	public function career_get( $id = 0 ){
 		$table = $this -> table ;
 		$result = $this -> db -> get_row(
 				"
@@ -102,7 +119,8 @@ class Courses_For_Career_Database {
 				FROM $table
 				WHERE id = $id
 				"
-			);		
+			);
+
 		return $result;		
 	}
 	
@@ -152,18 +170,28 @@ class Courses_For_Career_Database {
 	 * @since    1.0.0
 	 * 
 	 */
-	public function career_update(){		
-	
-		/* TO DO sanitize post and verify nonce */
-		$data = $_POST;
-		parse_str($_POST['form_data'], $form_data);
-		$form_data['courses'] = json_encode($form_data['courses'], true);
-		$form_data['time'] = current_time( 'mysql' );	
+	public function career_update(){
 
-		$this ->db -> update( 
+		$db = $this ->db;
+		$data = $_POST;
+
+		parse_str($data['form_data'], $form_data);
+		$form_data['courses'] = json_encode($form_data['courses'], true);
+
+		// sanitize
+		$form_data = $this -> sanitize( $form_data );
+
+		// nonce check
+		if (!wp_verify_nonce( $form_data['_wpnonce'] ) ) die( 'Failed security check' );
+		unset($form_data['_wpnonce']);
+		unset($form_data['_wp_http_referer']);
+
+		$form_data['time'] = current_time( 'mysql' );
+
+		$db -> update(
 				$this -> table,
 				$form_data,	
-				array( 'id' => $data['career_id'] )
+				array( 'id' => (int)$data['career_id'] )
 			);		
 	}
 	
@@ -174,7 +202,8 @@ class Courses_For_Career_Database {
 	 * @return   object     Object list with all items
 	 *
 	 */
-	public function getAll(){		
+	public function getAll(){
+
 		$table = $this -> table;	
 		$results = $this -> db ->get_results( 
 			"
@@ -182,7 +211,8 @@ class Courses_For_Career_Database {
 			FROM $table	
 			ORDER BY  ordering ASC
 			"
-			);		
+			);
+
 		return $results;
 	}
 	
@@ -193,7 +223,8 @@ class Courses_For_Career_Database {
 	 * @return   object     Object list with all items
 	 *
 	 */
-	public function getOptions( $prefix = 'courses_for_career' ){		
+	public function getOptions( $prefix = 'courses_for_career' ){
+
 		$table = $this -> options_table;	
 		$results = $this -> db ->get_results( 
 			"
@@ -201,7 +232,8 @@ class Courses_For_Career_Database {
 			FROM $table	
 			WHERE option_name LIKE '%$prefix%'
 			"
-			);				
+			);
+
 		return $results;
 	}
 	
@@ -212,7 +244,8 @@ class Courses_For_Career_Database {
 	 * @return   object     Object list with all items
 	 *
 	 */
-	public function getCourses(){		
+	public function getCourses(){
+
 		$table = $this -> posts_table;	
 		$results = $this -> db ->get_results( 
 			"
@@ -221,7 +254,8 @@ class Courses_For_Career_Database {
 			WHERE post_type = 'course' 
 			AND post_status = 'publish'			
 			"
-		);		
+		);
+
 		return $results;
 	}
 	
@@ -235,14 +269,14 @@ class Courses_For_Career_Database {
 	 *
 	 */
 	public function getCoursesPosts( $post_type = 'course', $post_in = array() ){		
-		$table = $this -> posts_table;	
-		
+
 		$args = array(
                     'post_type' 	=> $post_type,
                     'post__in' 		=> $post_in,
 					'post_status' 	=> 'publish'
                 );
-        $posts = get_posts($args);		
+        $posts = get_posts($args);
+
 		return $posts;
 	}
 	
@@ -302,5 +336,24 @@ class Courses_For_Career_Database {
 		];
 		
 		return $results;
-	}	
+	}
+
+	/**
+	 * Sanitize the input before handing it back to save to the database.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @param    array    $input        The input.
+	 * @return   array    $new_input    The sanitized input.
+	 */
+	public function sanitize( $input ) {
+
+		$new_input = array();
+
+		foreach ( $input as $key => $val ) {
+			$new_input[ $key ] = ( isset( $input[ $key ] ) ) ?	sanitize_text_field( $val ) : '' ;
+		}
+
+		return $new_input;
+	}
 }
