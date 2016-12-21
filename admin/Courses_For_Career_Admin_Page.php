@@ -83,7 +83,9 @@ class Courses_For_Career_Admin_Page {
 			<div id="" data-id="" class="c4c-form cloned">
 				<div class="drag-drop-bar"> </div>			
 				<form id="0" class="career-form" action="" method="post">
-					
+
+					<?php wp_nonce_field(); ?>
+
 					<div class="inputs career">
 					<label for="name"><?php echo __( 'Career', 'courses-for-career' ) ?></label>
 					<input class="sort-disabled" type="text" name="name" id="name" required value="">
@@ -172,6 +174,9 @@ class Courses_For_Career_Admin_Page {
 			<div class="drag-drop-bar"><div class="wp-menu-image dashicons-before dashicons-move" style="float:right; margin-right:10px;"><br></div> </div>
 			
 			<form id="<?php echo $item_id ?>" class="career-form" action="" method="post">
+
+				<?php wp_nonce_field(); ?>
+
 				<div class="inputs career">
 				<label for="name"><?php echo __( 'Career', 'courses-for-career' ) ?></label>
 				<input class="sort-disabled" type="text" name="name" id="name" required value="<?php echo $item_name ?>">
