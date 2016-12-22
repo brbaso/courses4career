@@ -1,7 +1,6 @@
 <?php
 namespace Admin\Partials ;
 
-
 class Courses_For_Career_Admin_Display {
 
 	/**
