@@ -39,7 +39,7 @@ class Widget_Ajax{
 	public function widget_render_courses() {
 		
 		$data = $_POST;
-		$career_id = $data['career_id'];
+		$career_id = (int) $data['career_id'];
 		
 		$widget_id = $data['wid'];		
 		$woptions = get_option('widget_c4c-widget');
@@ -50,7 +50,7 @@ class Widget_Ajax{
 			$results = $this -> dbhandle -> courses_by_career($career_id);
 			$courses = $results['posts'];
 			
-		// let's get options evntually						
+		// let's get options eventually
 		$image_show = ( $options['show_image'] == 'Yes') ? true : false ;		
 		$meta_show = ( $options['show_meta'] == 'Yes') ? true : false ;
 		$title_show = ( $options['show_title'] == 'Yes') ? true : false ;		
@@ -69,7 +69,7 @@ class Widget_Ajax{
 					}					
 					$output .= '<div class="entry">';					
 						if($meta_show) {
-							$output .= '<p class="widget-sensei-course-meta">'; // <span class="course-author">by '.$c -> author.'</span>
+							$output .= '<p class="widget-sensei-course-meta">';
 								foreach ($c -> categories as $cat ){									
 									$output .= ' | <span class="course-category"><a href="'.site_url( '/search-courses/?search-type=courses&course-category='.$cat -> term_id.'&status=&s=" rel="tag' ).'" rel="tag">'.$cat -> name.'</a></span>';									
 								}								
