@@ -11,6 +11,7 @@ if($instance['show_description'] == 'Yes'){
 	echo '<div class = "widget-description">'.esc_attr($instance['description']).'</div>' ;
 }
 ?>
+
 <div class="c4c-form search-course-page-search-form-wrap">
 	<form action="" method="get" id="searchform" class="search-form-wrap search-for-courses">
 		<input name="search-type" value="courses" type="hidden">
