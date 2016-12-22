@@ -150,10 +150,10 @@ class Courses_For_Career {
 		// database ajax operations
 		$plugin_db = new Courses_For_Career_Database( 'courses_for_career' );
 
-		$this->loader->add_action("wp_ajax_career_save", $plugin_db, 'career_save');
-		$this->loader->add_action("wp_ajax_career_delete", $plugin_db, 'career_delete');
-		$this->loader->add_action("wp_ajax_career_update", $plugin_db, 'career_update');
-		$this->loader->add_action("wp_ajax_item_sort", $plugin_db, 're_order');
+		$this->loader->add_action('wp_ajax_career_save', $plugin_db, 'career_save');
+		$this->loader->add_action('wp_ajax_career_delete', $plugin_db, 'career_delete');
+		$this->loader->add_action('wp_ajax_career_update', $plugin_db, 'career_update');
+		$this->loader->add_action('wp_ajax_item_sort', $plugin_db, 're_order');
 
 		//register C4C_Widget - add admin hook
 		add_action('admin_init',function(){
@@ -185,7 +185,7 @@ class Courses_For_Career {
 		$dbhandle = new Courses_For_Career_Database( 'courses_for_career' );
 		$plugin_ajax = new Courses_For_Career_Ajax( $dbhandle );
 
-		$this->loader->add_action("wp_ajax_render_courses", $plugin_ajax, 'render_courses');
+		$this->loader->add_action('wp_ajax_render_courses', $plugin_ajax, 'render_courses');
 		$this->loader->add_action("wp_ajax_nopriv_render_courses", $plugin_ajax, 'render_courses');
 
 		//register C4C_Widget - add widget hook
@@ -197,8 +197,8 @@ class Courses_For_Career {
 		// add public widget ajax Widget_Ajax
 		$plugin_c4c_ajax = new Widget_Ajax( $dbhandle );
 
-		$this->loader->add_action("wp_ajax_widget_render_courses", $plugin_c4c_ajax, 'widget_render_courses');
-		$this->loader->add_action("wp_ajax_nopriv_widget_render_courses", $plugin_c4c_ajax, 'widget_render_courses');
+		$this->loader->add_action('wp_ajax_widget_render_courses', $plugin_c4c_ajax, 'widget_render_courses');
+		$this->loader->add_action('wp_ajax_nopriv_widget_render_courses', $plugin_c4c_ajax, 'widget_render_courses');
 	}
 
 	/**
