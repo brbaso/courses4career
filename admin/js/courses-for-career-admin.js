@@ -18,7 +18,7 @@
 			active_content.append(cloned_content);
 			
 			var cloned = active_content.find('.cloned');
-			cloned.attr('id', 'no-sort')
+			cloned.attr('id', 'no-sort');
 			cloned.find('.for-chosen').addClass('chzn-select');
 			
 			cloned.find('.chzn-select').chosen({				
@@ -84,7 +84,7 @@
 					action: action, // handle this ajax request
 					career_id: career_id, // career id
 					form_data: form_data // form data
-				}
+				};
 			
 			animation_container.show(); // Show the animate loading			
 			
@@ -117,13 +117,12 @@
 					forma.find('.update-career').attr('disabled', 'true');
 					
 					animation_container.hide(); // Hide the loading animation
-					return; 
+
 				},
-				error: function(xhr,textStatus,e) { 
-					//alert(e);
+				error: function(xhr,textStatus,e) {
 					alert('There was an error saving the updates');				
 					animation_container.hide(); // Hide the loading animation
-					return; 
+
 				}
 			};
 			$.ajax(opts);		
@@ -139,8 +138,7 @@
 			
 			cancel: '#no-sort, .sort-disabled',
 			update: function(event, ui) {				
-				$('#no-sort').remove(); // Remove new unsaved/unsortable item 
-				//alert(itemList.sortable('toArray').toString())  // reordered id's string: 9,10,3			
+				$('#no-sort').remove(); // Remove new unsaved/unsortable item
 				
 				big_animation_container.show(); // Show the animate loading 
 
@@ -156,13 +154,12 @@
 					},
 					success: function(response) {						
 						big_animation_container.hide(); // Hide the loading animation
-						return; 
+
 					},
-					error: function(xhr,textStatus,e) {  
-						//alert(e);
+					error: function(xhr,textStatus,e) {
 						alert('There was an error saving the updates');
 						big_animation_container.hide(); // Hide the loading animation
-						return; 
+
 					}
 				};
 				$.ajax(opts);
