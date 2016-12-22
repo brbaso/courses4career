@@ -39,10 +39,6 @@ class Courses_For_Career_Admin_Page {
 	 * @since    1.0.0
 	 */
 	public function courses_for_career_admin_page(){
-
-	// TODO ADD nonce to form !!
-        //$retrieved_nonce = $_REQUEST['_wpnonce'];
-		//if (!wp_verify_nonce($retrieved_nonce, 'save_action' ) ) die( 'Failed security check' );	
 		
 		// get all courses to populate the form dropdown multiple
 		$courses = $this -> dbhandle -> getCourses();
@@ -103,7 +99,6 @@ class Courses_For_Career_Admin_Page {
 						<?php
 						foreach ( $courses as $course ) {
 						?>
-						<!--option value="<?php echo $course -> ID; ?>"<?php selected( in_array( $term->term_id, $current_terms ) ); ?>><?php echo $term->name; ?></option-->
 						<option value="<?php echo $course -> ID; ?>" ><?php echo $course -> post_title; ?></option>
 						<?php
 						}
@@ -125,9 +120,8 @@ class Courses_For_Career_Admin_Page {
 							</div>
 						</div>
 					</div>
-					
 					<!-- / loader -->
-					
+
 					<div id="new-courses" class="button-controls">						
 						<a href="#" class="save-career action-button button btn-primary button-large" data-action = "career_save"><?php _e('Save', 'courses-for-career'); ?></a>
 						<a href="#" class="remove-career  button btn-warning button-large"><?php _e('Remove', 'courses-for-career'); ?></a>
