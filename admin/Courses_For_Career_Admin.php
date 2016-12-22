@@ -133,7 +133,6 @@ class Courses_For_Career_Admin {
 			$this->plugin_name
 		);
 		
-		
 		// Add a Image section
 		add_settings_section(
 			$this->option_name . '_image',
@@ -311,6 +310,7 @@ class Courses_For_Career_Admin {
 	public function courses_for_career_shortcode_cb() {
 		echo '<p>' . __( 'To show the plugin please put the <strong>[courses4career]</strong> shortcode within your pages or posts', 'courses-for-career' ) . '</p>';
 	}
+
 	/**
 	 * Render the text for section
 	 *
