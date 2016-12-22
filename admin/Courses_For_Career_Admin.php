@@ -336,8 +336,7 @@ class Courses_For_Career_Admin {
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_show_image' ?>" value="No" <?php echo (get_option("courses_for_career_show_image") == 'No')?'checked="checked"':'';?>>
 					<?php _e( 'No', 'courses_for_career' ); ?>
-				</label>				
-				
+				</label>
 			</fieldset>
 		<?php
 	}
@@ -378,8 +377,7 @@ class Courses_For_Career_Admin {
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_show_title' ?>" value="No" <?php echo (get_option("courses_for_career_show_title") == 'No')?'checked="checked"':'';?>>
 					<?php _e( 'No', 'courses_for_career' ); ?>
-				</label>				
-				
+				</label>
 			</fieldset>
 		<?php
 	}
@@ -420,8 +418,7 @@ class Courses_For_Career_Admin {
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_show_meta' ?>" value="No" <?php echo (get_option("courses_for_career_show_meta") == 'No')?'checked="checked"':'';?>>
 					<?php _e( 'No', 'courses_for_career' ); ?>
-				</label>				
-				
+				</label>
 			</fieldset>
 		<?php
 	}
@@ -462,8 +459,7 @@ class Courses_For_Career_Admin {
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_show_excerpt' ?>" value="No" <?php echo (get_option("courses_for_career_show_excerpt") == 'No')?'checked="checked"':'';?>>
 					<?php _e( 'No', 'courses_for_career' ); ?>
-				</label>				
-				
+				</label>
 			</fieldset>
 		<?php
 	}
@@ -505,8 +501,7 @@ class Courses_For_Career_Admin {
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_show_career' ?>" value="No" <?php echo (get_option("courses_for_career_show_career") == 'No')?'checked="checked"':'';?>>
 					<?php _e( 'No', 'courses_for_career' ); ?>
-				</label>				
-				
+				</label>
 			</fieldset>
 		<?php
 	}
@@ -518,9 +513,7 @@ class Courses_For_Career_Admin {
 	 */
 	public function courses_for_career_career_class_cb() {
 		?>
-		<input type="text" name="<?php echo  $this->option_name . '_career_class' ?>" id="<?php echo $this->option_name . '_career_class' ?>" value=<?php echo get_option("courses_for_career_career_class") ?>> 
-		
-		
+		<input type="text" name="<?php echo  $this->option_name . '_career_class' ?>" id="<?php echo $this->option_name . '_career_class' ?>" value=<?php echo get_option("courses_for_career_career_class") ?>>
 	<?php	
 	}
 	
@@ -540,8 +533,7 @@ class Courses_For_Career_Admin {
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_show_career_title' ?>" value="No" <?php echo (get_option("courses_for_career_show_career_title") == 'No')?'checked="checked"':'';?>>
 					<?php _e( 'No', 'courses_for_career' ); ?>
-				</label>				
-				
+				</label>
 			</fieldset>
 		<?php
 	}
@@ -553,9 +545,7 @@ class Courses_For_Career_Admin {
 	 */
 	public function courses_for_career_career_title_class_cb() {
 		?>
-		<input type="text" name="<?php echo  $this->option_name . '_career_title_class' ?>" id="<?php echo $this->option_name . '_career_title_class' ?>" value=<?php echo get_option("courses_for_career_career_class") ?>> 
-		
-		
+		<input type="text" name="<?php echo  $this->option_name . '_career_title_class' ?>" id="<?php echo $this->option_name . '_career_title_class' ?>" value=<?php echo get_option("courses_for_career_career_class") ?>>
 	<?php	
 	}
 	
