@@ -42,6 +42,36 @@ class Courses_For_Career_Loader {
 	}
 
 	/**
+	 * Loops through passed array of actions and adds them to collection
+	 *
+	 * @param    array              $actions_to_add             The array of the  actions to add.
+	 * @since    1.0.0
+	 */
+	public function actions_to_add( $actions_to_add = array() ) {
+		foreach ($actions_to_add as $hook  => $values){
+			foreach($values as $v) {
+				//$this -> add_action( $hook, $component, $callback, $priority = 10, $accepted_args = 1 );
+				$this->add_action( $hook, $v[0], $v[1], $v[2] = 10, $v[3] = 1 );
+			}
+		}
+	}
+
+	/**
+	 * Loops through passed array of filters and adds them to collection
+	 *
+	 * @param    array             $filters_to_add             The array of the filters to add.
+	 * @since    1.0.0
+	 */
+	public function filters_to_add( $filters_to_add = array() ) {
+		foreach ($filters_to_add as $hook  => $values){
+			foreach($values as $v) {
+				//$this -> add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 );
+				$this->add_filter( $hook, $v[0], $v[1], $v[2] = 10, $v[3] = 1 );
+			}
+		}
+	}
+
+	/**
 	 * Add a new action to the collection to be registered with WordPress.
 	 *
 	 * @since    1.0.0
