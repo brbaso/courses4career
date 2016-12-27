@@ -134,42 +134,50 @@ class Courses_For_Career {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Courses_For_Career_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		// admin scripts
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		// admin options page
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_options_page' );
-
-		// admin register settings
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
-
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'courses_for_career_admin_menu' );
-
-		// database ajax operations
 		$plugin_db = new Courses_For_Career_Database( 'courses_for_career' );
-
-		$this->loader->add_action('wp_ajax_career_save', $plugin_db, 'career_save');
-		$this->loader->add_action('wp_ajax_career_delete', $plugin_db, 'career_delete');
-		$this->loader->add_action('wp_ajax_career_update', $plugin_db, 'career_update');
-		$this->loader->add_action('wp_ajax_item_sort', $plugin_db, 're_order');
-
-		//register C4C_Widget - add admin hook
-		add_action('admin_init',function(){
-			$dbhandle = new Courses_For_Career_Database('courses_for_career');
-			register_widget(new C4C_Widget($dbhandle));
-		});
-
-		// deactivate if SENSEI gone
 		$plugin_this = $this;
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_this, 'sensei_gone_self_deactivate' );
+		$actions_to_add =[
+			// admin register settings, register widget
+			'admin_init' => [
+				[$plugin_admin, 'register_settings'],
+				[$plugin_this, 'widget_register']
+			],
+			// admin scripts
+			'admin_enqueue_scripts' =>[
+				[$plugin_admin, 'enqueue_styles'],
+				[$plugin_admin, 'enqueue_scripts']
+			],
+			// admin options page, plugin menu
+			'admin_menu' => [
+				[$plugin_admin, 'add_options_page'],
+				[$plugin_admin, 'courses_for_career_admin_menu']
+			],
+			// database ajax operations
+			'wp_ajax_career_save' => [
+				[$plugin_db, 'career_save']
+			],
+			'wp_ajax_career_delete' => [
+				[$plugin_db, 'career_delete']
+			],
+			'wp_ajax_career_update' => [
+				[$plugin_db, 'career_update']
+			],
+			'wp_ajax_item_sort' => [
+				[$plugin_db, 're_order']
+			],
+			// deactivate if SENSEI gone
+			'plugins_loaded' => [
+				[$plugin_this, 'sensei_gone_self_deactivate']
+			]
+		];
+
+		$this-> loader -> actions_to_add( $actions_to_add );
 	}
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
+	 * of the plugin and the widget.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -177,28 +185,48 @@ class Courses_For_Career {
 	private function define_public_hooks() {
 
 		$plugin_public = new Courses_For_Career_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_db  = new Courses_For_Career_Database( 'courses_for_career' );
+		$plugin_ajax = new Courses_For_Career_Ajax( $plugin_db );
+		$plugin_c4c_ajax = new Widget_Ajax( $plugin_db );
+		$plugin_this = $this;
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$actions_to_add =[
+			// register widget
+			'widgets_init' => [
+				[$plugin_this, 'widget_register']
+			],
+			// wp scripts
+			'wp_enqueue_scripts' =>[
+				[$plugin_public, 'enqueue_styles'],
+				[$plugin_public, 'enqueue_scripts']
+			],
+			// plugin and widget ajax hooks
+			'wp_ajax_render_courses' => [
+				[$plugin_ajax, 'render_courses']
+			],
+			'wp_ajax_nopriv_render_courses' => [
+				[$plugin_ajax, 'render_courses']
+			],
+			'wp_ajax_widget_render_courses' => [
+				[$plugin_c4c_ajax, 'widget_render_courses']
+			],
+			'wp_ajax_nopriv_widget_render_courses' => [
+				[$plugin_c4c_ajax, 'widget_render_courses']
+			]
+		];
 
-		// database ajax operations
-		$dbhandle = new Courses_For_Career_Database( 'courses_for_career' );
-		$plugin_ajax = new Courses_For_Career_Ajax( $dbhandle );
+		$this-> loader -> actions_to_add( $actions_to_add );
+	}
 
-		$this->loader->add_action('wp_ajax_render_courses', $plugin_ajax, 'render_courses');
-		$this->loader->add_action("wp_ajax_nopriv_render_courses", $plugin_ajax, 'render_courses');
-
-		//register C4C_Widget - add widget hook
-		add_action('widgets_init',function(){
-			$dbhandle = new Courses_For_Career_Database('courses_for_career');
-			register_widget(new C4C_Widget($dbhandle));
-		});
-
-		// add public widget ajax Widget_Ajax
-		$plugin_c4c_ajax = new Widget_Ajax( $dbhandle );
-
-		$this->loader->add_action('wp_ajax_widget_render_courses', $plugin_c4c_ajax, 'widget_render_courses');
-		$this->loader->add_action('wp_ajax_nopriv_widget_render_courses', $plugin_c4c_ajax, 'widget_render_courses');
+	/**
+	 * Register widget
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 */
+	public function widget_register() {
+		$dbhandle = new Courses_For_Career_Database('courses_for_career');
+		register_widget(new C4C_Widget($dbhandle));
 	}
 
 	/**
@@ -207,7 +235,6 @@ class Courses_For_Career {
 	 * @since    1.0.0
 	 */
 	public function run() {
-
 		$this->loader->run();
 	}
 
