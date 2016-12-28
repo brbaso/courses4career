@@ -106,9 +106,7 @@ class Courses_For_Career_Ajax{
 							$output .= '<p class="sensei-course-meta '.$meta_class.'">
 								<span class="course-author">by '.$c -> author.'</span>';								
 								foreach ($c -> categories as $cat ){
-									//$output .= ' | <span class="course-category"><a href="'.$cat -> cat_permalink.'" rel="tag">'.$cat -> name.'</a></span>';  $url = site_url( '/search-courses/?search-type=courses&course-category='.$cat -> term_id.'&status=&s=" rel="tag' );
 									$output .= ' | <span class="course-category"><a href="'.site_url( '/search-courses/?search-type=courses&course-category='.$cat -> term_id.'&status=&s=" rel="tag' ).'" rel="tag">'.$cat -> name.'</a></span>';
-									
 								}								
 							$output .= '</p>';
 						}						
