@@ -35,18 +35,14 @@
 				dataType: 'json',
 				data:data,
 				success: function(response) {
-					//alert(response)
+
 					response_container.html(response).append(animation_container);
 					animation_container.hide(); // Hide the loading animation
-					
-
 				},
 				error: function(xhr,textStatus,e) { 
-					//alert(e);
+
 					alert('There was an error');				
 					animation_container.hide(); // Hide the loading animation
-					
-
 				}
 			};
 			$.ajax(opts);	
