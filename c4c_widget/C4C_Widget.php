@@ -88,7 +88,7 @@ class C4C_Widget extends \WP_Widget {
 		];
 
 		$this-> loader -> actions_to_add( $w_actions_to_add );
-		$this->loader->run();
+		$this-> loader -> run();
 
 		parent::__construct(
 			$this->get_widget_slug(),
