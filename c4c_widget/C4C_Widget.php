@@ -2,7 +2,7 @@
 namespace Widget ;
 
 use Includes\Courses_For_Career_Database;
-
+use Includes\Courses_For_Career_Loader;
 /**
  *
  * @package   C4C_Widget
@@ -32,26 +32,64 @@ class C4C_Widget extends \WP_Widget {
     protected $widget_slug = 'c4c-widget';
 	
 	/**
-	 * Dependency: Courses_For_Career_Database	  includes/class-courses-for-career-database.php
+	 * Dependency: Courses_For_Career_Database	  includes/Courses_For_Career_Database.php
 	 * @since    1.0.0
 	 *	 
 	 */
 	private $dbhandle;
 
 	/**
+	 * Dependency: Courses_For_Career_Loader	  includes/Courses_For_Career_Loader.php
+	 * @since    1.0.0
+	 *
+	 */
+	private $loader;
+
+	/**
 	 * Initialize widget.
 	 *
 	 * @since    1.0.0
-	 * @param      object    $dbhandle      Object Courses_For_Career_Database.
+	 *
+	 * @param Courses_For_Career_Database|object $dbhandle Object Courses_For_Career_Database.
+	 * @param Courses_For_Career_Loader|object   $loader   Object Courses_For_Career_Loader.
 	 */
+	public function __construct(Courses_For_Career_Database $dbhandle, Courses_For_Career_Loader $loader ) {
 
-	
-	public function __construct(Courses_For_Career_Database $dbhandle) {
-
-		// load plugin text domain
-		add_action( 'init', array( $this, 'widget_textdomain' ) );		
 		$this -> dbhandle = $dbhandle;
-		
+		$this -> loader = $loader;
+
+		$w_actions_to_add =[
+			// load plugin text domain
+			'init' => [
+				[$this, 'widget_textdomain']
+			],
+			// Register admin styles and scripts
+			'admin_print_styles' =>[
+				[$this, 'register_admin_styles']
+			],
+			'admin_enqueue_scripts' => [
+				[$this, 'register_admin_scripts']
+			],
+			// Register site styles and scripts
+			'wp_enqueue_scripts' => [
+				[$this, 'register_widget_styles'],
+				[$this, 'register_widget_scripts']
+			],
+			// Refreshing the widget's cached output with each new post
+			'save_post' => [
+				[$this, 'flush_widget_cache']
+			],
+			'deleted_post' => [
+				[$this, 'flush_widget_cache']
+			],
+			'switch_theme' => [
+				[$this, 'flush_widget_cache']
+			]
+		];
+
+		$this-> loader -> actions_to_add( $w_actions_to_add );
+		$this->loader->run();
+
 		parent::__construct(
 			$this->get_widget_slug(),
 			__( 'C4C_Widget', $this->get_widget_slug() ),
@@ -60,20 +98,7 @@ class C4C_Widget extends \WP_Widget {
 				'description' => __( 'Shows Career for Courses dropdown search in widget area.', $this->get_widget_slug() )
 			)
 		);
-
-		// Register admin styles and scripts
-		add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
-
-		// Register site styles and scripts
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_styles' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_scripts' ) );
-
-		// Refreshing the widget's cached output with each new post
-		add_action( 'save_post',    array( $this, 'flush_widget_cache' ) );
-		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
-	} 
+	}
 
 
     /**
@@ -86,7 +111,6 @@ class C4C_Widget extends \WP_Widget {
     public function get_widget_slug() {
         return $this->widget_slug;
     }
-
 
 	/**
 	 * @ Outputs the content of the widget.
@@ -128,8 +152,7 @@ class C4C_Widget extends \WP_Widget {
 		wp_cache_set( $this->get_widget_slug(), $cache, 'widget' );
 
 		print $widget_string;
-	} 
-	
+	}
 	
 	public function flush_widget_cache() 
 	{
@@ -188,7 +211,6 @@ class C4C_Widget extends \WP_Widget {
 		// Display the admin form
 		include( plugin_dir_path(__FILE__) . 'views/admin.php' );
 	}
-
 	
 	/**
 	 * Loads the Widget's text domain for localization and translation.
