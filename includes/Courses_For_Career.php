@@ -216,6 +216,7 @@ class Courses_For_Career {
 		];
 
 		$this-> loader -> actions_to_add( $actions_to_add );
+
 	}
 
 	/**
@@ -226,7 +227,8 @@ class Courses_For_Career {
 	 */
 	public function widget_register() {
 		$dbhandle = new Courses_For_Career_Database('courses_for_career');
-		register_widget(new C4C_Widget($dbhandle));
+		$loader = $this->loader;
+		register_widget(new C4C_Widget($dbhandle, $loader));
 	}
 
 	/**
