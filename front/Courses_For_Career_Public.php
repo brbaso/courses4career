@@ -55,7 +55,6 @@ class Courses_For_Career_Public {
 	public function enqueue_styles() {		
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/courses-for-career-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
