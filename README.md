@@ -26,4 +26,24 @@ Define Careers with titles and descriptions and assign multiple Sensei Courses t
 3. Add [courses4career] shortcode in your pages and posts to show the plugin
 2. Go to Widget Page and move C4C Widget to desired widget position and adjust options.
 
-## TODO more DOCs !!! ...
+## Screen shots:
+
+**Plugins page**
+
+![Plugins page](http://brbaso.com/images/courses-for-career/c4c-1.jpg)
+
+
+**Plugins options page**
+
+![Plugins options page](http://brbaso.com/images/courses-for-career/c4c-2.jpg)
+
+**Plugins widgets**
+
+![Plugins widgets](http://brbaso.com/images/courses-for-career/c4c-3.jpg)
+
+
+**Plugins front end render**
+
+![Plugins front end render](http://brbaso.com/images/courses-for-career/c4c-4.jpg)
+
+
