@@ -7,7 +7,7 @@ Plugin for filtering Sensei courses by pre defined Career options. Requires Sens
 Define Careers with titles and descriptions and assign multiple Sensei Courses to show on site. Careers renders as a drop down list which on change renders list of assigned courses. Also, there is a C4C Widget, as a part of the plugin so that you can add it to your Theme's widget positions.
 
 
-##Major features in Courses4Career include:
+## Major features in Courses4Career include:
 
 * Easy add multiple Career items with title and description in admin area
 * Assign desired multiple Sensei Courses to each Career item.
@@ -18,7 +18,7 @@ Define Careers with titles and descriptions and assign multiple Sensei Courses t
 * Responsive
 
 
-##Installation
+## Installation
 
 1. Upload the Career4Courses plugin to your blog, activate it.
 2. Go to settings page and adjust options.
